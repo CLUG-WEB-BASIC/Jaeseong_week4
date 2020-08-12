@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block contents %}
+
+    <br><br>
+    <center>여기는 blog_list 페이지 입니당 :)<center/>
+    <br><br>
+
+    {% for blog in blogs %}
+        <div class="card" style="width: 50rem;">
+          <div class="card-body">
+            <h5 class="card-title">{{ blog.title }}</h5>
+            <p class="card-text">{{ blog.summary }}</p>
+            <a href="{% url "read_blog_detail" blog.id %}" class="btn btn-outline-dark">More</a>
+          </div>
+        </div>
+
+        <hr><hr>
+    {% endfor %}
+
+    <button type="button" class="btn btn-warning">
+    <a href="{% url 'blog_new' %}" style="color: black">새글작성</a><button/>
+
+{% endblock %}
