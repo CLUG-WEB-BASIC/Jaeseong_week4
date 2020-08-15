@@ -9,6 +9,9 @@
 <div class="card text-center" style="width: 50rem;">
   <div class="card-body">
     <h5 class="card-title">{{ blog.title }}</h5>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">{{ blog.hash_tag }}</li>
+    </ul>
     <h6 class="card-subtitle mb-2 text-muted">{{ blog.pub_date }}</h6>
     <p class="card-text">{{ blog.body }}</p>
   </div>
@@ -17,9 +20,9 @@
 <br><br>
 
 <button type="button" class="btn btn-success">
-<a href="#" style="color: white">update</a><button/>
+<a href="#" style="color: white">update</a></button>
 
 <button type="button" class="btn btn-danger">
-<a href="#" style="color: white">delete</a><button/>
+<a href="#" style="color: white">delete</a></button>
 
 {% endblock %}

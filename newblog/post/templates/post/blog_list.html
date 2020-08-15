@@ -10,6 +10,9 @@
         <div class="card" style="width: 50rem;">
           <div class="card-body">
             <h5 class="card-title">{{ blog.title }}</h5>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">{{ blog.hash_tag }}</li>
+            </ul>
             <p class="card-text">{{ blog.summary }}</p>
             <a href="{% url "read_blog_detail" blog.id %}" class="btn btn-outline-dark">More</a>
           </div>
@@ -19,6 +22,6 @@
     {% endfor %}
 
     <button type="button" class="btn btn-warning">
-    <a href="{% url 'blog_new' %}" style="color: black">새글작성</a><button/>
+    <a href="{% url 'blog_new' %}" style="color: black">새글작성</a></button>
 
 {% endblock %}

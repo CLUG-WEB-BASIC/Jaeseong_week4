@@ -18,6 +18,7 @@ def create_blog(request): #submit 했을때 하는 동작이지. ㅇㅇ, BLOG_ID
     blog.title = request.POST['title']
     blog.body = request.POST['body']
     blog.pub_date = timezone.datetime.now() #근데 컴퓨터는 지금 시간을 어케 알까?
+    blog.hash_tag = request.POST['hash_tag']
     blog.save()  # 이게 query method 중 하나래!! models.py 랑 db 연결,, 아!! 그니까 딱 이 한줄 때문에 객체 하나가 추가되는거네!!
     return redirect('read_blog_list')    #admin에도 뜨고 ㅇㅇ 다 하고나면 다시 list 로 돌아가게 해주는거넹.. (이건 함수곘네)
 
