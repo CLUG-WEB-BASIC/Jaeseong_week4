@@ -1,10 +1,14 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Blog
 from django.utils import timezone
+from django.core.paginator import Paginator
 
 def read_blog_list(request):  #이거 요청이 오면 blogs 에다가 다 담아넣어둠.
     blogs = Blog.objects.all()
-    return render(request, 'post/blog_list.html', {'blogs':blogs})
+    paginator = Paginator(blogs, 2)
+    page = request.GET.get('page') #입력받은 page 를 page라는 새 변수에 넣는거구만.
+    posts = paginator.get_page(page) #해당 페이지의 글들만 단체로 묶어서 보내주는거지.
+    return render(request, 'post/blog_list.html', {'posts':posts}) #여기 변수 바꿨으니까 저 html만 수정해주면대네
 
 def read_blog_detail(request, blog_id):
     blog = get_object_or_404(Blog, pk = blog_id)
@@ -25,3 +29,20 @@ def create_blog(request): #submit 했을때 하는 동작이지. ㅇㅇ, BLOG_ID
 
 # 아 뒤에 저렇게 딕셔너리로 blog:blog 이렇게 써야지 저 html 로 가서 blogs 나 blog 변수 쓰면 여기서 가져가준다 그말이구나.
 # blog_new 는 새로 만드는거라필요가 없지 매개변수, 페이지만 띄워주면 되니까
+
+def delete_blog(request, blog_id):
+    blog = get_object_or_404(Blog, pk = blog_id)
+    blog.delete() #마찬가지로 이게 save()처럼 데이터베이스에서 지우는거겥네
+    return redirect('read_blog_list')
+
+def update_blog(request, blog_id):
+    blog = get_object_or_404(Blog, pk = blog_id)
+    if request.method == "POST":
+        blog.title = request.POST['title']
+        blog.body = request.POST['body']
+        blog.hash_tag = request.POST['hash_tag']
+        blog.pub_date = timezone.datetime.now()
+        blog.save()
+        return redirect('read_blog_detail', blog_id)
+    else:
+        return render(request, 'post/blog_edit.html', {'blog':blog})

@@ -20,9 +20,9 @@
 <br><br>
 
 <button type="button" class="btn btn-success">
-<a href="#" style="color: white">update</a></button>
+<a href="{% url 'update_blog' blog.id %}" style="color: white">update</a></button>
 
 <button type="button" class="btn btn-danger">
-<a href="#" style="color: white">delete</a></button>
+<a href="{% url 'delete_blog' blog.id %}" style="color: white">delete</a></button>
 
 {% endblock %}
